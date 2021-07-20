@@ -19,6 +19,10 @@ public:
      * Render to our texture (or to the screen)
      */
     void Render(UWidget* root);
+
+protected:
+    // Recursively render all child widgets
+    void RecursiveRender(UWidget* widget, matrix4 model);
     
 protected:
     // Output texture for drawing

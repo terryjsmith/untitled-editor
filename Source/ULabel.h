@@ -20,9 +20,9 @@ public:
     /**
      * Set font / size (in pixels)
      */
-    void Font(UFont* font) { m_font = font; }
+    void Font(UFont* font);
     
-    void FontSize(int size) { m_fontSize = size; }
+    void FontSize(int size);
     int FontSize() { return m_fontSize; }
     
     /**
@@ -52,6 +52,9 @@ protected:
     
     // Text color
     vector4 m_color;
+
+    // Width, height, and baseline of final texture
+    int m_width, m_height, m_baseline;
 };
 
 #endif

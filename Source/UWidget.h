@@ -6,10 +6,17 @@
 #include <UStyle.h>
 #include <vector>
 
+class URenderer;
+
 class UWidget {
 public:
     UWidget();
-    virtual ~UWidget() = default;
+    virtual ~UWidget();
+
+    enum SizePolicy {
+        POLICY_GROWTOFIT = 1,
+        POLICY_EXPANDING
+    };
     
     /**
      * Get / set parent
@@ -48,10 +55,19 @@ public:
      * Get texture (will re-draw if necessary)
      */
     UTexture2D* GetTexture();
+
+    /**
+     * Set / get expanding status
+     */
+    void SizePolicy(int horizontal, int vertical);
+    int SizePolicyHorizontal() { return m_sizePolicyHorizontal; }
+    int SizePolicyVertical() { return m_sizePolicyVertical; }
     
 protected:
     // Should be overridden to populate texture data
     virtual void Redraw() = 0;
+
+    friend class URenderer;
     
 protected:
     // Parent
@@ -61,7 +77,8 @@ protected:
     std::vector<UStyle> m_styles;
     
     // Is this item expanding by default or a fixed size but stretchable?
-    bool m_growToFit;
+    int m_sizePolicyHorizontal;
+    int m_sizePolicyVertical;
     
     // Children
     std::vector<UWidget*> m_children;
@@ -74,6 +91,10 @@ protected:
     
     // Actual width and height based on calculations
     int m_actualWidth, m_actualHeight;
+
+    // Vertex buffer / array object
+    unsigned int m_vertexBuffer;
+    unsigned int m_vertexArray;
 };
 
 

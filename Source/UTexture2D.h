@@ -2,6 +2,8 @@
 #ifndef utexture2d_h
 #define utexture2d_h
 
+#include <string>
+
 class UTexture2D {
 public:
     UTexture2D();
@@ -24,6 +26,11 @@ public:
      */
     void Bind(int slot);
     unsigned int GetTexture() { return m_texture; }
+
+    /**
+     * Save to disk
+     */
+    void Save(std::string filename);
     
 protected:
     // Internal texture handle

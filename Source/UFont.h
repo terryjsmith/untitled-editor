@@ -26,6 +26,12 @@ public:
      * Analyze a string to get render width and heights (max up and down from baseline/origin)
      */
     void GetTextureSize(std::string text, int size, int& width, int& height, int& baseline);
+
+    /**
+     * Get / set default font
+     */
+    static void SetDefaultFont(UFont* font) { m_defaultFont = font; }
+    static UFont* GetDefaultFont() { return m_defaultFont; }
     
 protected:
     // Font face
@@ -34,6 +40,9 @@ protected:
     // FreeType library
     static FT_Library m_ft;
     static bool m_initialized;
+
+    // Default font
+    static UFont* m_defaultFont;
 };
 
 #endif 

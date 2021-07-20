@@ -11,7 +11,7 @@ UStyle::UStyle() {
         m_borderColors[i] = vector4(0, 0, 0, 0);
         m_borderWidths[i] = 0;
         m_margins[i] = 0;
-        m_paddings[i] = 0;
+        m_paddings[i] = 5;
     }
     
     // Set to -1 (based on content size)

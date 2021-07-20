@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.3 Win32 - www.glfw.org
+// GLFW 3.4 Win32 - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2002-2006 Marcus Geelnard
 // Copyright (c) 2006-2019 Camilla Löwy <elmindreda@glfw.org>
@@ -586,7 +586,6 @@ int _glfwPlatformInit(void)
         return GLFW_FALSE;
 
     _glfwInitTimerWin32();
-    _glfwInitJoysticksWin32();
 
     _glfwPollMonitorsWin32();
     return GLFW_TRUE;
@@ -613,15 +612,15 @@ void _glfwPlatformTerminate(void)
     _glfwTerminateWGL();
     _glfwTerminateEGL();
 
-    _glfwTerminateJoysticksWin32();
-
     freeLibraries();
 }
 
 const char* _glfwPlatformGetVersionString(void)
 {
     return _GLFW_VERSION_NUMBER " Win32 WGL EGL OSMesa"
-#if defined(__MINGW32__)
+#if defined(__MINGW64_VERSION_MAJOR)
+        " MinGW-w64"
+#elif defined(__MINGW32__)
         " MinGW"
 #elif defined(_MSC_VER)
         " VisualC"

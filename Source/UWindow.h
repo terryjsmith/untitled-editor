@@ -8,6 +8,9 @@ class UWindow : public UWidget {
 public:
     UWindow() = default;
     ~UWindow() = default;
+
+protected:
+    void Redraw() { }
 };
 
 #endif
