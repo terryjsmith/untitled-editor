@@ -6,6 +6,7 @@
 UWidget::UWidget() {
     m_parent = 0;
     m_actualWidth = m_actualHeight = 0;
+    m_actualX = m_actualY = 0;
     m_sizePolicyHorizontal = SizePolicy::POLICY_EXPANDING;
     m_sizePolicyVertical = SizePolicy::POLICY_GROWTOFIT;
     m_dirty = true; // Dirty first thing after being created
@@ -143,6 +144,8 @@ float UWidget::Width(float maxWidth) {
     // Iterate over children
     for (int i = 0; i < m_children.size(); i++) {
         m_children[i]->Width(m_actualWidth - totalPadding);
+
+        // TODO: Figure out how to apply padding / spacing to elements
     }
     
     return(finalWidth);

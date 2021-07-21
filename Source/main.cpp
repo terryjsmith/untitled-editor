@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <UWindow.h>
 #include <UButton.h>
+#include <UHBoxLayout.h>
 #include <URenderer.h>
 
 int main(int argc, char** argv) {
@@ -53,14 +54,30 @@ int main(int argc, char** argv) {
     renderer->Initialize(framebufferWidth, framebufferHeight);
 
     UWindow* root = new UWindow();
+
+    UHBoxLayout* hbox = new UHBoxLayout();
+    root->AddChild(hbox);
+
     UButton* button = new UButton();
     button->Style(0)->BackgroundColor(vector4(1, 0, 0, 1));
-    button->Style(0)->BorderColor(vector4(1, 1, 1, 1));
     button->Label()->Text("Test");
     button->Label()->FontSize(20);
-    button->Label()->FontColor(vector4(0, 1, 0, 1));
 
-    root->AddChild(button);
+    hbox->AddChild(button);
+
+    UButton* button2 = new UButton();
+    button2->Style(0)->BackgroundColor(vector4(0, 1, 0, 1));
+    button2->Label()->Text("Test");
+    button2->Label()->FontSize(20);
+
+    hbox->AddChild(button2);
+
+    UButton* button3 = new UButton();
+    button3->Style(0)->BackgroundColor(vector4(0, 0, 1, 1));
+    button3->Label()->Text("Test");
+    button3->Label()->FontSize(20);
+
+    hbox->AddChild(button3);
     
     while(glfwWindowShouldClose(glfwWindow) == false) {
         // Do rendering stuff

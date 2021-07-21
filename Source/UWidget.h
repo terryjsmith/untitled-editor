@@ -62,6 +62,12 @@ public:
     void SizePolicy(int horizontal, int vertical);
     int SizePolicyHorizontal() { return m_sizePolicyHorizontal; }
     int SizePolicyVertical() { return m_sizePolicyVertical; }
+
+    /**
+     * Get / set offset
+     */
+    void OffsetX(float x) { m_actualX = x; }
+    void OffsetY(float y) { m_actualY = y; }
     
 protected:
     // Should be overridden to populate texture data
@@ -91,6 +97,9 @@ protected:
     
     // Actual width and height based on calculations
     int m_actualWidth, m_actualHeight;
+
+    // Offset into parent widget
+    int m_actualX, m_actualY;
 
     // Vertex buffer / array object
     unsigned int m_vertexBuffer;

@@ -71,7 +71,6 @@ void URenderer::Initialize(int width, int height) {
 
         void main () {
             out_diffuse = texture(inputTexture, frag_texcoord);
-            if(out_diffuse.a < 0.1) discard;
         }
         )V0";
         unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -117,6 +116,10 @@ void URenderer::Render(UWidget* root) {
     // Disable depth testing
     GL_CHECK(glDisable(GL_DEPTH_TEST));
     GL_CHECK(glDisable(GL_CULL_FACE));
+
+    // Enable blending
+    GL_CHECK(glEnable(GL_BLEND));
+    GL_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     
     // Use shader program
     GL_CHECK(glUseProgram(m_program));
@@ -137,15 +140,16 @@ void URenderer::Render(UWidget* root) {
         RecursiveRender(widget, matrix4(1.0f));
     }
 
-    //m_output->Save("screen.png");
+    // Disable blending
+    GL_CHECK(glDisable(GL_BLEND));
 }
 
 void URenderer::RecursiveRender(UWidget* widget, matrix4 model) {
     // See if this widget has a texture
     UTexture2D* texture = widget->GetTexture();
 
-    float top = widget->Style(0)->Padding(UStyle::Side::TOP);
-    float left = widget->Style(0)->Padding(UStyle::Side::LEFT);
+    float top = widget->Style(0)->Padding(UStyle::Side::TOP) + widget->m_actualY;
+    float left = widget->Style(0)->Padding(UStyle::Side::LEFT) + widget->m_actualX;
 
     model = glm::translate(model, vector3(left, top, 0.0f));
 

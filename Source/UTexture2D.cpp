@@ -56,8 +56,8 @@ void UTexture2D::Bind(int slot) {
     GL_CHECK(glActiveTexture(GL_TEXTURE0 + slot));
     GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_texture));
 
-    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 void UTexture2D::Save(std::string filename) {
